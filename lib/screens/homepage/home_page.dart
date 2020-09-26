@@ -2,31 +2,39 @@ import 'package:RecipeApp/screens/homepage/components/body.dart';
 import 'package:RecipeApp/size_config.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     SizeConfig().init(context);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: AppBar(
+        leading: null,
+        elevation: 0.0,
+        backgroundColor: Color(0xfffe9721),
+        title: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Color(0xff161d27),
+          ),
+          // child: Center(),
+        ),
+        centerTitle: true,
+      ),
       body: Body(),
+      
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      title: Icon(Icons.adb),
-      centerTitle: true,
-      backgroundColor: Colors.blue,
-      elevation: 0.5,
-      actions: [
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {},
-          color: Colors.white,
-        )
-      ],
-    );
-  }
+  @override
+  bool get wantKeepAlive => true;
 }

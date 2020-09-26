@@ -1,3 +1,4 @@
+import 'package:RecipeApp/main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +32,8 @@ class _LoginPageState extends State<LoginPage> {
 
   void login() {
     print("login function");
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => MainPage()));
   }
 
   void register() {
@@ -44,18 +47,25 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/food.jpg'),
-                    fit: BoxFit.cover)),
+              image: DecorationImage(
+                image: AssetImage('assets/images/food.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Colors.transparent,
-              Colors.transparent,
-              Color(0xff161d27).withOpacity(0.9),
-              Color(0xff161d27),
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+              gradient: LinearGradient(
+                colors: [
+                  Colors.transparent,
+                  Colors.transparent,
+                  Color(0xff161d27).withOpacity(0.9),
+                  Color(0xff161d27),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
           ),
           Center(
             child: Column(
@@ -79,7 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                     height: 50,
                     margin: EdgeInsets.only(left: 40, right: 40),
                     child: TextField(
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                       onChanged: (value) => email = value,
                       decoration: InputDecoration(
                         hintText: "Email",
@@ -87,11 +100,17 @@ class _LoginPageState extends State<LoginPage> {
                         filled: true,
                         fillColor: Color(0xff161d27).withOpacity(0.9),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Color(0xfffe9721))),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: Color(0xfffe9721),
+                          ),
+                        ),
                         focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Color(0xfffe9721))),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: Color(0xfffe9721),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -105,18 +124,27 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: true,
                       key: pass1,
                       onChanged: (value) => pass = value,
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                       decoration: InputDecoration(
                         hintText: "Password",
                         hintStyle: TextStyle(color: Colors.grey.shade700),
                         filled: true,
                         fillColor: Color(0xff161d27).withOpacity(0.9),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Color(0xfffe9721))),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: Color(0xfffe9721),
+                          ),
+                        ),
                         focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Color(0xfffe9721))),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: Color(0xfffe9721),
+                          ),
+                        ),
                       ),
                     ),
                   ),
