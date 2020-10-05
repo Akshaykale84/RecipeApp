@@ -20,15 +20,17 @@ class _MainPageState extends State<MainPage> {
     CategoryPage(),
     ProfilePage()
   ];
-  void _onPageChanged(int index) {
-    
-  }
+  void _onPageChanged(int index) {}
 
   void _itemTapped(int selectedIndex) {
-    _pageController.jumpToPage(selectedIndex);
-    setState(() {
-      _index = selectedIndex;
-    });
+    if (selectedIndex == 1) {
+      showSearch(context: context, delegate: SearchBar());
+    } else {
+      _pageController.jumpToPage(selectedIndex);
+      setState(() {
+        _index = selectedIndex;
+      });
+    }
   }
 
   @override
@@ -91,7 +93,7 @@ class _MainPageState extends State<MainPage> {
               backgroundColor: Colors.purple.withOpacity(0.2),
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              gap: 9,
+              gap: 10,
             ),
             GButton(
               icon: Icons.search,

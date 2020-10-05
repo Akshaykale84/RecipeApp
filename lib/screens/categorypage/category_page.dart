@@ -6,6 +6,9 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClientMixin{
+
+  List<String> cat =['Maharashtra', 'Punjab', 'Spain', 'Italy'];
+
   @override
   void initState() {
     super.initState();
