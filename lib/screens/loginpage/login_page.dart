@@ -1,5 +1,4 @@
-import 'package:RecipeApp/main_page.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:RecipeApp/screens/loginpage/login_export.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,8 +12,6 @@ class _LoginPageState extends State<LoginPage> {
   var email;
 
   var pass;
-
-  var pass1;
 
   PageType _pageType = PageType.login;
 
@@ -85,73 +82,11 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    height: 50,
-                    margin: EdgeInsets.only(left: 40, right: 40),
-                    child: TextField(
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      onChanged: (value) => email = value,
-                      decoration: InputDecoration(
-                        hintText: "Email",
-                        hintStyle: TextStyle(color: Colors.grey.shade700),
-                        filled: true,
-                        fillColor: Color(0xff161d27).withOpacity(0.9),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(
-                            color: Color(0xfffe9721),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(
-                            color: Color(0xfffe9721),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    height: 50,
-                    margin: EdgeInsets.only(left: 40, right: 40),
-                    child: TextField(
-                      obscureText: true,
-                      key: pass1,
-                      onChanged: (value) => pass = value,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      decoration: InputDecoration(
-                        hintText: "Password",
-                        hintStyle: TextStyle(color: Colors.grey.shade700),
-                        filled: true,
-                        fillColor: Color(0xff161d27).withOpacity(0.9),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(
-                            color: Color(0xfffe9721),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(
-                            color: Color(0xfffe9721),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  TextFields(pageType: _pageType),
                   SizedBox(
                     height: 6,
                   ),
-                  buildForgotPass(),
+                  ForgetPass(pageType: _pageType),
                   SizedBox(
                     height: 12,
                   ),
@@ -258,25 +193,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  Widget buildForgotPass() {
-    if (_pageType == PageType.login) {
-      return FlatButton(
-        child: Text(
-          "Forgot Password?",
-          style: TextStyle(
-              color: Color(0xfffe9721),
-              fontSize: 14,
-              fontWeight: FontWeight.bold),
-        ),
-        onPressed: () {
-          print("Forget Password");
-        },
-      );
-    } else {
-      return SizedBox(
-        height: 48,
-      );
-    }
-  }
 }
+
+

@@ -1,4 +1,6 @@
+import 'package:RecipeApp/screens/searchpage/components/search_result.dart';
 import 'package:flutter/material.dart';
+import 'package:RecipeApp/main_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key key}) : super(key: key);
@@ -8,10 +10,26 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+
+  void pagechange() {
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainPage()));
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
         backgroundColor: Colors.black.withOpacity(0.7),
         title: Text("search"),
       ),
@@ -43,6 +61,8 @@ class SearchBar extends SearchDelegate<String> {
     "fifth",
     "sixth",
   ];
+
+  String searchResult;
   
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -68,7 +88,8 @@ class SearchBar extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    throw UnimplementedError();
+    return SearchResult();
+
   }
 
   @override
@@ -78,8 +99,8 @@ class SearchBar extends SearchDelegate<String> {
       itemBuilder: (context, index) => ListTile(
         title: Text(suggestionList[index]),
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SearchPage()));
+          searchResult = suggestionList[index];
+          showResults(context);    
         },
       ),
       itemCount: suggestionList.length,
