@@ -18,7 +18,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     SearchPage(),
     CategoryPage(),
-    ProfilePage()
+    ProfilePage(),
   ];
   void _onPageChanged(int index) {}
 

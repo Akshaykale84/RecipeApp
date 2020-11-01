@@ -1,4 +1,4 @@
-import 'package:RecipeApp/screens/homepage/components/body.dart';
+import 'package:RecipeApp/screens/homepage/home_export.dart';
 import 'package:RecipeApp/size_config.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,5 @@
 import 'package:RecipeApp/screens/searchpage/components/search_result.dart';
 import 'package:flutter/material.dart';
-import 'package:RecipeApp/main_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key key}) : super(key: key);

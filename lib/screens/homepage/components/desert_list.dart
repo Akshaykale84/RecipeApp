@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DesertList extends StatelessWidget {
-   DesertList({
+  DesertList({
     Key key,
     @required this.list,
     @required this.context,
@@ -57,9 +57,10 @@ class DesertList extends StatelessWidget {
                 return Container(
                   height: 180,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  child: true
-                      ? buildDesertRowLeft(index)
-                      : buildDesertRowRight(index),
+                  child: buildDesertRowLeft(index),
+                  // child: isDesertLeft
+                  //     ? buildDesertRowLeft(index)
+                  //     : buildDesertRowRight(index),
                 );
               },
             ),
