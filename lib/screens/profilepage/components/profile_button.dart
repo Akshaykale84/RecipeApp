@@ -14,9 +14,9 @@ class ProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(6),
       height: MediaQuery.of(context).size.height * 0.07,
-      width: MediaQuery.of(context).size.width * 0.80,
+      width: MediaQuery.of(context).size.width * 0.82,
       child: RaisedButton(
         color: Color(0xff373737),
         shape: RoundedRectangleBorder(
@@ -37,12 +37,12 @@ class ProfileButton extends StatelessWidget {
             color: Colors.white,
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.07,
+            width: MediaQuery.of(context).size.width * 0.06,
           ),
           Row(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.50,
+                width: MediaQuery.of(context).size.width * 0.52,
                 child: Text(
                   "$data",
                   style: TextStyle(

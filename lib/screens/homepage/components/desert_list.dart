@@ -17,7 +17,7 @@ class DesertList extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(1, 0, 1, 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.grey,
+        color: Colors.transparent,
       ),
       margin: EdgeInsets.all(5.0),
       alignment: Alignment.centerLeft,

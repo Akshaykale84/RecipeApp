@@ -1,4 +1,4 @@
-import 'package:RecipeApp/screens/searchpage/components/search_result.dart';
+import 'package:RecipeApp/screens/searchpage/search_export.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -9,10 +9,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-
-  void pagechange() {
-    
-  }
+  void pagechange() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +59,7 @@ class SearchBar extends SearchDelegate<String> {
   ];
 
   String searchResult;
-  
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -88,21 +85,30 @@ class SearchBar extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     return SearchResult();
-
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty ? recentCities : food;
-    return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        title: Text(suggestionList[index]),
-        onTap: () {
-          searchResult = suggestionList[index];
-          showResults(context);    
-        },
-      ),
-      itemCount: suggestionList.length,
-    );
+    final suggestionList =  food;
+    if (query.isNotEmpty) {
+      return ListView.builder(
+        itemBuilder: (context, index) => ListTile(
+          title: Text(suggestionList[index]),
+          onTap: () {
+            searchResult = suggestionList[index];
+            showResults(context);
+            query="";
+            print(searchResult);
+          },
+        ),
+        itemCount: suggestionList.length,
+      );
+    } else {
+      return SafeArea(
+        child: Container(
+          color: Colors.grey,
+        ),
+      );
+    }
   }
 }
