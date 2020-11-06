@@ -13,20 +13,6 @@ class _LoginPageState extends State<LoginPage> {
 
   var pass;
 
-  PageType _pageType = PageType.login;
-
-  void switchToRegister() {
-    setState(() {
-      _pageType = PageType.register;
-    });
-  }
-
-  void switchToLogin() {
-    setState(() {
-      _pageType = PageType.login;
-    });
-  }
-
   void login() {
     print("login function");
     Navigator.pushReplacement(
@@ -66,133 +52,100 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Center(
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    "Welcome!",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 38,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  buildDescText(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFields(pageType: _pageType),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  ForgetPass(pageType: _pageType),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    height: 50,
-                    width: double.infinity,
-                    margin: EdgeInsets.only(left: 40, right: 40),
-                    child: buildSubmitButton(),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      buildSwitchText(),
-                      SizedBox(
-                        width: 0,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  "Welcome!",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 38,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.013,
+                ),
+                Text(
+                  "Time to cook, let's Sign In",
+                  style: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.026,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.065,
+                  width: MediaQuery.of(context).size.width * 0.80,
+                  child: FlatButton.icon(
+                    color: Colors.white,
+                    onPressed: login,
+                    icon: Container(
+                      margin: EdgeInsets.only(
+                        right: 5,
                       ),
-                      buildSwitchButton(),
-                    ],
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.height * 0.05,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"),
+                            fit: BoxFit.fill),
+                      ),
+                    ),
+                    label: Text(
+                      "Sign in with Google",
+                      style: TextStyle(
+                        color: Color(0xff1877F2),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
-                  SizedBox(
-                    height: 20,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.026,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.065,
+                  width: MediaQuery.of(context).size.width * 0.80,
+                  child: FlatButton.icon(
+                    color: Colors.white,
+                    onPressed: login,
+                    icon: Container(
+                      margin: EdgeInsets.only(right: 5),
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.height * 0.05,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512"),
+                            fit: BoxFit.fill),
+                      ),
+                    ),
+                    label: Text(
+                      "Sign in with Facebook",
+                      style: TextStyle(
+                        color: Color(0xff1877F2),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
-                ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.18,
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
-
-  Text buildDescText() {
-    String data;
-    if (_pageType == PageType.login) {
-      data = "Sign in";
-    } else {
-      data = "Sign up";
-    }
-    return Text(
-      "Time to cook, let's $data",
-      style: TextStyle(color: Colors.grey.shade500, fontSize: 16),
-    );
-  }
-
-  Text buildSwitchText() {
-    String data;
-    if (_pageType == PageType.login) {
-      data = "It's your first time here?";
-    } else {
-      data = "Already have an account?";
-    }
-    return Text(
-      "$data",
-      style: TextStyle(color: Colors.white),
-    );
-  }
-
-  FlatButton buildSwitchButton() {
-    String data;
-    if (_pageType == PageType.login) {
-      data = "Sign up";
-    } else {
-      data = "Sing in";
-    }
-    return FlatButton(
-      child: Text(
-        "$data",
-        style: TextStyle(color: Color(0xfffe9721), fontWeight: FontWeight.bold),
-      ),
-      onPressed: () {
-        if (_pageType == PageType.login) {
-          switchToRegister();
-        } else {
-          switchToLogin();
-        }
-      },
-    );
-  }
-
-  FlatButton buildSubmitButton() {
-    String data;
-    if (_pageType == PageType.login) {
-      data = "SIGN IN";
-    } else {
-      data = "SIGN UP";
-    }
-    return FlatButton(
-      onPressed: () {
-        if (_pageType == PageType.login) {
-          login();
-        } else {
-          register();
-        }
-      },
-      color: Color(0xfffe9721),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Text(
-        "$data",
-        style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-      ),
-    );
-  }
 }
-
-

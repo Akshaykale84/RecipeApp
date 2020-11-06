@@ -89,26 +89,18 @@ class SearchBar extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList =  food;
-    if (query.isNotEmpty) {
-      return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-          title: Text(suggestionList[index]),
-          onTap: () {
-            searchResult = suggestionList[index];
-            showResults(context);
-            query="";
-            print(searchResult);
-          },
-        ),
-        itemCount: suggestionList.length,
-      );
-    } else {
-      return SafeArea(
-        child: Container(
-          color: Colors.grey,
-        ),
-      );
-    }
+    final suggestionList = query.isEmpty ? recentCities : food;
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(suggestionList[index]),
+        onTap: () {
+          searchResult = suggestionList[index];
+          showResults(context);
+          query = "";
+          print(searchResult);
+        },
+      ),
+    );
   }
 }

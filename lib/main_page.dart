@@ -1,8 +1,4 @@
-import 'package:RecipeApp/screens/categorypage/category_page.dart';
-import 'package:RecipeApp/screens/homepage/home_page.dart';
-import 'package:RecipeApp/screens/profilepage/profile_page.dart';
-import 'package:RecipeApp/screens/searchpage/search_page.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:RecipeApp/main_export.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
