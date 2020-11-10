@@ -1,4 +1,5 @@
 import 'package:RecipeApp/main_export.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _MainPageState extends State<MainPage> {
     CategoryPage(),
     ProfilePage(),
   ];
-  void _onPageChanged(int index) {}
+
 
   void _itemTapped(int selectedIndex) {
     if (selectedIndex == 1) {
@@ -30,39 +31,20 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  void initState() {
+    print(FirebaseAuth.instance.currentUser.uid);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       body: PageView(
         controller: _pageController,
         children: _screens,
-        onPageChanged: _onPageChanged,
         physics: NeverScrollableScrollPhysics(),
       ),
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   height: 50,
-      //   animationDuration: Duration(milliseconds: 500),
-      //   onTap: _itemTapped,
-      //   items: [
-      //     Icon(
-      //       Icons.home,
-      //       color: Colors.black,
-      //     ),
-      //     Icon(
-      //       Icons.search,
-      //       color: Colors.black,
-      //     ),
-      //     Icon(
-      //       Icons.category,
-      //       color: Colors.black,
-      //     ),
-      //     Icon(
-      //       Icons.person,
-      //       color: Colors.black,
-      //     ),
-
-      //   ],
-      // ),
       bottomNavigationBar: buildGNavBar(),
     );
   }

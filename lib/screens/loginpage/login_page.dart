@@ -1,4 +1,5 @@
 import 'package:RecipeApp/screens/loginpage/login_export.dart';
+import 'package:RecipeApp/services/authentication.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -6,17 +7,16 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-enum PageType { login, register }
-
 class _LoginPageState extends State<LoginPage> {
-  var email;
-
-  var pass;
-
   void login() {
-    print("login function");
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => MainPage()));
+    signInWithGoogle().whenComplete(
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainPage(),
+        ),
+      ),
+    );
   }
 
   void register() {

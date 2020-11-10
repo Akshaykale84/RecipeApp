@@ -1,3 +1,5 @@
+import 'package:RecipeApp/screens/loginpage/login_page.dart';
+import 'package:RecipeApp/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:RecipeApp/screens/profilepage/profile_export.dart';
 
@@ -90,7 +92,14 @@ class ProfilePage extends StatelessWidget {
                     ProfileButton(
                       icon: Icons.logout,
                       data: "Logout",
-                      tap: () {},
+                      tap: () => signOutUser().whenComplete(
+                        () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
