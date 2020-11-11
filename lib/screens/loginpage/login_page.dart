@@ -8,15 +8,35 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  void login() {
-    signInWithGoogle().whenComplete(
-      () => Navigator.pushReplacement(
+  void googleLogin() {
+    signInWithGoogle().then((value) {
+      print(value.displayName);
+      print(value.providerData[0].providerId);
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => MainPage(),
         ),
-      ),
-    );
+      );
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  void facebookLogin() {
+    signInWithFacebook().then((value) {
+      print(value.displayName);
+      print(value.providerData[0].providerId);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainPage(),
+        ),
+      );
+    }).catchError((e) {
+      print(e.code);
+      if (e.code == "account-exists-with-different-credential") print("Lorem4");
+    });
   }
 
   void register() {
@@ -76,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: MediaQuery.of(context).size.width * 0.80,
                   child: FlatButton.icon(
                     color: Colors.white,
-                    onPressed: login,
+                    onPressed: googleLogin,
                     icon: Container(
                       margin: EdgeInsets.only(
                         right: 5,
@@ -112,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: MediaQuery.of(context).size.width * 0.80,
                   child: FlatButton.icon(
                     color: Colors.white,
-                    onPressed: login,
+                    onPressed: facebookLogin,
                     icon: Container(
                       margin: EdgeInsets.only(right: 5),
                       height: MediaQuery.of(context).size.height * 0.05,
