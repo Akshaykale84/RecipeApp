@@ -1,4 +1,5 @@
 import 'package:RecipeApp/main_page.dart';
+import 'package:RecipeApp/models/user.dart';
 import 'package:RecipeApp/screens/loginpage/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,6 +39,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    User user = FirebaseAuth.instance.currentUser;
+    UserData userData;
+    if (user != null) {
+      userData = UserData(
+          emailId: user.email,
+          name: user.displayName,
+          photoUrl: user.photoURL,
+          uid: user.uid);
+    }
     if (_error) {
       return MaterialApp(
         title: 'Recipe App',
@@ -83,7 +93,11 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: FirebaseAuth.instance.currentUser != null ? MainPage() : LoginPage(),
+      home: FirebaseAuth.instance.currentUser != null
+          ? MainPage(
+              userData: userData,
+            )
+          : LoginPage(),
     );
   }
 }

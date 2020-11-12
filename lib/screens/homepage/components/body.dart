@@ -2,8 +2,8 @@ import 'package:RecipeApp/screens/homepage/home_export.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
-  Body({Key key}) : super(key: key);
-
+  Body({Key key, this.userData}) : super(key: key);
+  final UserData userData;
   final List<Color> list = [
     Colors.red,
     Colors.blue,
@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
               margin: EdgeInsets.all(5.0),
               alignment: Alignment.centerLeft,
               child: Text(
-                "Welcome USERNAME,",
+                "Welcome ${userData.name},",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.normal,

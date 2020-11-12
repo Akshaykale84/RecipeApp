@@ -6,3 +6,4 @@ export 'package:RecipeApp/screens/searchpage/components/nutrition_info.dart';
 export 'package:RecipeApp/screens/searchpage/components/ingredients.dart';
 export 'package:RecipeApp/screens/searchpage/components/preparation.dart';
 export 'package:RecipeApp/screens/searchpage/components/related_recipes.dart';
+export 'package:RecipeApp/models/user.dart';

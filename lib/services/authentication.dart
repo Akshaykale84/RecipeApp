@@ -1,3 +1,4 @@
+import 'package:RecipeApp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -7,7 +8,7 @@ final GoogleSignIn googleSignIn = new GoogleSignIn();
 final FacebookLogin fbLogin = new FacebookLogin();
 UserCredential user;
 
-Future<User>signInWithGoogle() async {
+Future<UserData> signInWithGoogle() async {
   GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   GoogleSignInAuthentication googleAuthentication =
       await googleSignInAccount.authentication;
@@ -17,22 +18,26 @@ Future<User>signInWithGoogle() async {
   );
 
   user = await _auth.signInWithCredential(credential);
-  print("user name:${user.user.uid}");
-  print("login function");
-  print(_auth.currentUser.displayName);
-
-  return user.user;
+  UserData userData = UserData(
+      name: user.user.displayName,
+      emailId: user.user.email,
+      uid: user.user.uid,
+      photoUrl: user.user.photoURL);
+  return userData;
 }
 
-Future<User>signInWithFacebook() async {
-  final FacebookLoginResult result = await fbLogin.logIn(['email', 'public_profile']);
+Future<UserData> signInWithFacebook() async {
+  final FacebookLoginResult result =
+      await fbLogin.logIn(['email', 'public_profile']);
   final FacebookAuthCredential facebookAuthCredential =
       FacebookAuthProvider.credential(result.accessToken.token);
   user = await _auth.signInWithCredential(facebookAuthCredential);
-  print("user name:${user.user.uid}");
-  print("login function");
-  print(_auth.currentUser.displayName);
-  return user.user;
+  UserData userData = UserData(
+      name: user.user.displayName,
+      emailId: user.user.email,
+      uid: user.user.uid,
+      photoUrl: user.user.photoURL);
+  return userData;
 }
 
 Future signOutUser() async {

@@ -1,23 +1,22 @@
 import 'package:RecipeApp/main_export.dart';
+import 'package:RecipeApp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
+  final UserData userData;
+
+  const MainPage({Key key, this.userData}) : super(key: key);
   @override
-  _MainPageState createState() => _MainPageState();
+  _MainPageState createState() => _MainPageState(userData);
 }
 
 class _MainPageState extends State<MainPage> {
   int _index = 0;
-
+  final UserData userData;
   PageController _pageController = PageController();
-  List<Widget> _screens = [
-    HomePage(),
-    SearchPage(),
-    CategoryPage(),
-    ProfilePage(),
-  ];
 
+  _MainPageState(this.userData);
 
   void _itemTapped(int selectedIndex) {
     if (selectedIndex == 1) {
@@ -42,7 +41,12 @@ class _MainPageState extends State<MainPage> {
       extendBody: true,
       body: PageView(
         controller: _pageController,
-        children: _screens,
+        children: <Widget>[
+          HomePage(userData: userData),
+          SearchPage(userData: userData),
+          CategoryPage(userData: userData),
+          ProfilePage(userData: userData),
+        ],
         physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: buildGNavBar(),

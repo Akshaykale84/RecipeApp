@@ -3,13 +3,18 @@ import 'package:RecipeApp/size_config.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  final UserData userData;
+  HomePage({Key key, this.userData}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(userData);
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
+  final UserData userData;
+
+  _HomePageState(this.userData);
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -30,8 +35,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         ),
         centerTitle: true,
       ),
-      body: Body(),
-      
+      body: Body(userData: userData),
     );
   }
 

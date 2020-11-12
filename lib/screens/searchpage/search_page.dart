@@ -2,13 +2,17 @@ import 'package:RecipeApp/screens/searchpage/search_export.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key key}) : super(key: key);
+  final UserData userData;
+  const SearchPage({Key key, this.userData}) : super(key: key);
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _SearchPageState createState() => _SearchPageState(userData);
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final UserData userData;
+
+  _SearchPageState(this.userData);
   void pagechange() {}
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,11 @@
+import 'package:RecipeApp/models/user.dart';
 import 'package:RecipeApp/screens/categorypage/components/category_list_page.dart';
 import 'package:flutter/material.dart';
 
-class CategoryPage extends StatefulWidget {
-  @override
-  _CategoryPageState createState() => _CategoryPageState();
-}
-
-class _CategoryPageState extends State<CategoryPage> {
-  List<IconData> icon = [
+class CategoryPage extends StatelessWidget {
+  CategoryPage({Key key, this.userData}) : super(key: key);
+  final UserData userData;
+  final List<IconData> icon = [
     Icons.add,
     Icons.home,
     Icons.logout,

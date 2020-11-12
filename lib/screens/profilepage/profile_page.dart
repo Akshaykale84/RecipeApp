@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:RecipeApp/screens/profilepage/profile_export.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key key}) : super(key: key);
+  final UserData userData;
 
+  const ProfilePage({Key key, this.userData}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class ProfilePage extends StatelessWidget {
               Container(
                 child: Center(
                   child: Text(
-                    "Display Name",
+                    "${userData.name}",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -50,7 +51,7 @@ class ProfilePage extends StatelessWidget {
               Container(
                 child: Center(
                   child: Text(
-                    "emailaddress@gmail.com",
+                    "${userData.emailId}",
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,

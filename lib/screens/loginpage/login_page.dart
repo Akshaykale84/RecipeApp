@@ -1,6 +1,8 @@
+// import 'package:RecipeApp/models/user.dart';
 import 'package:RecipeApp/screens/loginpage/login_export.dart';
 import 'package:RecipeApp/services/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:flushbar/flushbar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,12 +12,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   void googleLogin() {
     signInWithGoogle().then((value) {
-      print(value.displayName);
-      print(value.providerData[0].providerId);
+      print(value.name);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => MainPage(),
+          builder: (context) => MainPage(
+            userData: value,
+          ),
         ),
       );
     }).catchError((e) {
@@ -25,8 +28,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void facebookLogin() {
     signInWithFacebook().then((value) {
-      print(value.displayName);
-      print(value.providerData[0].providerId);
+      print(value.name);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -35,8 +37,40 @@ class _LoginPageState extends State<LoginPage> {
       );
     }).catchError((e) {
       print(e.code);
-      if (e.code == "account-exists-with-different-credential") print("Lorem4");
+      if (e.code == "account-exists-with-different-credential") {
+        showLoginErrorSnackBar("Email already exists",
+            "Account Already Exists with same Email ID!!");
+      }
     });
+  }
+
+  Flushbar showLoginErrorSnackBar(String title, String message) {
+    return Flushbar(
+      margin: EdgeInsets.all(8),
+      padding: EdgeInsets.all(10),
+      borderRadius: 8,
+      backgroundGradient: LinearGradient(
+        colors: [Colors.green.shade900, Colors.greenAccent.shade700],
+        stops: [0.6, 1],
+      ),
+      boxShadows: [
+        BoxShadow(
+          color: Colors.black45,
+          offset: Offset(3, 3),
+          blurRadius: 3,
+        ),
+      ],
+      dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+      title: "$title",
+      message: "$message",
+      icon: Icon(
+        Icons.error_outline,
+        size: 30,
+        color: Colors.red.shade900,
+      ),
+      duration: Duration(seconds: 5),
+    )..show(context);
   }
 
   void register() {
