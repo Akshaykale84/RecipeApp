@@ -1,6 +1,4 @@
 import 'package:RecipeApp/main_export.dart';
-import 'package:RecipeApp/models/user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,7 +13,6 @@ class _MainPageState extends State<MainPage> {
   int _index = 0;
   final UserData userData;
   PageController _pageController = PageController();
-
   _MainPageState(this.userData);
 
   void _itemTapped(int selectedIndex) {
@@ -29,27 +26,74 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  @override
-  void initState() {
-    print(FirebaseAuth.instance.currentUser.uid);
-    super.initState();
+  var result;
+  check() async {
+    result = await Connectivity().checkConnectivity();
   }
 
   @override
+  void initState() {
+    check();
+    super.initState();
+  }
+
+  void refresh() async {
+    result = await Connectivity().checkConnectivity();
+    setState(() {});
+  }
+
+  Future<ConnectivityResult> _check = Connectivity().checkConnectivity();
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      body: PageView(
-        controller: _pageController,
-        children: <Widget>[
-          HomePage(userData: userData),
-          SearchPage(userData: userData),
-          CategoryPage(userData: userData),
-          ProfilePage(userData: userData),
-        ],
-        physics: NeverScrollableScrollPhysics(),
-      ),
-      bottomNavigationBar: buildGNavBar(),
+    return FutureBuilder(
+      future: _check,
+      builder: (context, snapshot) {
+        if (result == ConnectivityResult.mobile) {
+          return Scaffold(
+            extendBody: true,
+            body: PageView(
+              controller: _pageController,
+              children: <Widget>[
+                HomePage(userData: userData),
+                SearchPage(userData: userData),
+                CategoryPage(userData: userData),
+                ProfilePage(userData: userData),
+              ],
+              scrollDirection: Axis.horizontal,
+            ),
+            bottomNavigationBar: buildGNavBar(),
+          );
+        }
+        if (result == ConnectivityResult.wifi) {
+          return Scaffold(
+            extendBody: true,
+            body: PageView(
+              controller: _pageController,
+              children: <Widget>[
+                HomePage(userData: userData),
+                SearchPage(userData: userData),
+                CategoryPage(userData: userData),
+                ProfilePage(userData: userData),
+              ],
+              physics: NeverScrollableScrollPhysics(),
+            ),
+            bottomNavigationBar: buildGNavBar(),
+          );
+        }
+        if (result == ConnectivityResult.none) {
+          return Scaffold(
+            body: ErrorPage(
+              tap: refresh,
+            ),
+          );
+        }
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 
@@ -63,7 +107,7 @@ class _MainPageState extends State<MainPage> {
         ),
         child: GNav(
           selectedIndex: _index,
-          curve: Curves.fastOutSlowIn,
+          curve: Curves.bounceIn,
           duration: Duration(milliseconds: 400),
           tabs: [
             GButton(
@@ -92,7 +136,7 @@ class _MainPageState extends State<MainPage> {
               icon: Icons.category,
               iconColor: Colors.black,
               iconActiveColor: Colors.blue,
-              text: "Category",
+              text: "Categories",
               textColor: Colors.black,
               backgroundColor: Colors.purple.withOpacity(0.2),
               iconSize: 24,
@@ -102,7 +146,10 @@ class _MainPageState extends State<MainPage> {
             GButton(
               leading: Container(
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  image: DecorationImage(
+                    image: NetworkImage(userData.photoUrl),
+                    fit: BoxFit.fill,
+                  ),
                   shape: BoxShape.circle,
                 ),
                 height: 25,

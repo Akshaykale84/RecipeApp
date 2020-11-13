@@ -1,5 +1,6 @@
+import 'package:RecipeApp/screens/errorpage/error_page.dart';
 import 'package:RecipeApp/screens/homepage/home_export.dart';
-import 'package:RecipeApp/size_config.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,29 +14,59 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   final UserData userData;
-
+  bool isConnected = false;
+  bool isChecked = false;
   _HomePageState(this.userData);
+  var result;
+  check() async {
+    result = await Connectivity().checkConnectivity();
+  }
+
+  @override
+  void initState() {
+    check();
+    super.initState();
+  }
+
+  void refresh() async {
+    result = await Connectivity().checkConnectivity();
+    setState(() {});
+  }
+
+  Future<ConnectivityResult> _check = Connectivity().checkConnectivity();
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    SizeConfig().init(context);
-    return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        elevation: 0.0,
-        backgroundColor: Color(0xfffe9721),
-        title: Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Color(0xff161d27),
+    return FutureBuilder(
+      future: _check,
+      builder: (context, snapshot) {
+        if (result == ConnectivityResult.wifi) {
+          return Scaffold(
+            body: Body(
+              userData: userData,
+            ),
+          );
+        }
+        if (result == ConnectivityResult.mobile) {
+          return Scaffold(
+            body: Body(
+              userData: userData,
+            ),
+          );
+        }
+        if (result == ConnectivityResult.none) {
+          return Scaffold(
+            body: ErrorPage(
+              tap: refresh,
+            ),
+          );
+        }
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
           ),
-          // child: Center(),
-        ),
-        centerTitle: true,
-      ),
-      body: Body(userData: userData),
+        );
+      },
     );
   }
 

@@ -3,3 +3,7 @@ export 'package:RecipeApp/screens/homepage/home_page.dart';
 export 'package:RecipeApp/screens/profilepage/profile_page.dart';
 export 'package:RecipeApp/screens/searchpage/search_page.dart';
 export 'package:google_nav_bar/google_nav_bar.dart';
+export 'package:RecipeApp/models/user.dart';
+export 'package:firebase_auth/firebase_auth.dart';
+export 'package:RecipeApp/screens/errorpage/error_page.dart';
+export 'package:connectivity/connectivity.dart';

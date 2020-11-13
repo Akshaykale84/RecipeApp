@@ -17,22 +17,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainPage()));
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
-        backgroundColor: Colors.black.withOpacity(0.7),
-        title: Text("search"),
-      ),
+     
       body: Container(
         child: Center(
           child: Text("Search Page!"),

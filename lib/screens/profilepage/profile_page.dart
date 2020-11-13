@@ -1,114 +1,71 @@
-import 'package:RecipeApp/screens/loginpage/login_page.dart';
-import 'package:RecipeApp/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:RecipeApp/screens/profilepage/profile_export.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final UserData userData;
 
   const ProfilePage({Key key, this.userData}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState(userData);
+}
+
+class _ProfilePageState extends State<ProfilePage>
+    with AutomaticKeepAliveClientMixin {
+  _ProfilePageState(this.userData);
+  final UserData userData;
+
+  var result;
+  check() async {
+    result = await Connectivity().checkConnectivity();
+  }
+
+  @override
+  void initState() {
+    check();
+    super.initState();
+  }
+
+  void refresh() async {
+    result = await Connectivity().checkConnectivity();
+    setState(() {});
+  }
+
+  Future<ConnectivityResult> _check = Connectivity().checkConnectivity();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff212121),
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.22,
-                color: Colors.transparent,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.red,
-                    ),
-                    height: MediaQuery.of(context).size.height * 0.17,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              Container(
-                child: Center(
-                  child: Text(
-                    "${userData.name}",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.015,
-              ),
-              Container(
-                child: Center(
-                  child: Text(
-                    "${userData.emailId}",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              Container(
-                child: Column(
-                  children: <Widget>[
-                    ProfileButton(
-                      icon: Icons.edit_outlined,
-                      data: "Edit Profile",
-                      tap: () {},
-                    ),
-                    ProfileButton(
-                      icon: Icons.account_circle_outlined,
-                      data: "Account Settings",
-                      tap: () {},
-                    ),
-                    ProfileButton(
-                      icon: Icons.favorite_border_outlined,
-                      data: "Liked Recipes",
-                      tap: () => print("hhh"),
-                    ),
-                    ProfileButton(
-                      icon: Icons.download_outlined,
-                      data: "Downloaded Recipes",
-                      tap: () {},
-                    ),
-                    ProfileButton(
-                      icon: Icons.feedback_outlined,
-                      data: "Feedback",
-                      tap: () {},
-                    ),
-                    ProfileButton(
-                      icon: Icons.logout,
-                      data: "Logout",
-                      tap: () => signOutUser().whenComplete(
-                        () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+    super.build(context);
+    return FutureBuilder(
+      future: _check,
+      builder: (context, snapshot) {
+        if (result == ConnectivityResult.mobile) {
+          return Scaffold(
+            backgroundColor: Color(0xff212121),
+            body: Body(userData: userData),
+          );
+        }
+        if (result == ConnectivityResult.wifi) {
+          return Scaffold(
+            backgroundColor: Color(0xff212121),
+            body: Body(userData: userData),
+          );
+        }
+        if (result == ConnectivityResult.none) {
+          return Scaffold(
+            body: ErrorPage(
+              tap: refresh,
+            ),
+          );
+        }
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

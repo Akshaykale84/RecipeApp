@@ -39,15 +39,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    User user = FirebaseAuth.instance.currentUser;
     UserData userData;
-    if (user != null) {
-      userData = UserData(
-          emailId: user.email,
-          name: user.displayName,
-          photoUrl: user.photoURL,
-          uid: user.uid);
-    }
+
     if (_error) {
       return MaterialApp(
         title: 'Recipe App',
@@ -85,7 +78,14 @@ class _MyAppState extends State<MyApp> {
         ),
       );
     }
-
+    User user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      userData = UserData(
+          emailId: user.email,
+          name: user.displayName,
+          photoUrl: user.photoURL,
+          uid: user.uid);
+    }
     return MaterialApp(
       title: 'Recipe App',
       debugShowCheckedModeBanner: false,
@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: FirebaseAuth.instance.currentUser != null
+      home: user != null
           ? MainPage(
               userData: userData,
             )
