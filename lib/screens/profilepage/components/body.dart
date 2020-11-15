@@ -1,5 +1,3 @@
-
-import 'package:RecipeApp/screens/profilepage/components/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:RecipeApp/screens/profilepage/profile_export.dart';
 
@@ -17,7 +15,9 @@ class Body extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-            ProfilePic(),
+            ProfilePic(
+              userData: userData,
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
@@ -36,4 +36,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-

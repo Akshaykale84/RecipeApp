@@ -13,16 +13,65 @@ class _SearchPageState extends State<SearchPage> {
   final UserData userData;
 
   _SearchPageState(this.userData);
-  void pagechange() {}
+  var result;
+  check() async {
+    result = await Connectivity().checkConnectivity();
+  }
+
+  @override
+  void initState() {
+    check();
+    super.initState();
+  }
+
+  void refresh() async {
+    result = await Connectivity().checkConnectivity();
+    setState(() {});
+  }
+
+  Future<ConnectivityResult> _check = Connectivity().checkConnectivity();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     
-      body: Container(
-        child: Center(
-          child: Text("Search Page!"),
-        ),
-      ),
+    return FutureBuilder(
+      future: _check,
+      builder: (context, snapshot) {
+        if (result == ConnectivityResult.mobile) {
+          return Scaffold(
+            backgroundColor: Color(0xff212121),
+            body: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  SearchTitle(),
+                  SearchButton(),
+                  RecentRecipes(),
+                ],
+              ),
+            ),
+          );
+        }
+        if (result == ConnectivityResult.wifi) {
+          return Scaffold(
+            backgroundColor: Color(0xff212121),
+            body: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  SearchTitle(),
+                  SearchButton(),
+                  RecentRecipes(),
+                ],
+              ),
+            ),
+          );
+        }
+        if (result == ConnectivityResult.none) {
+          return Scaffold(
+            body: ErrorPage(
+              tap: refresh,
+            ),
+          );
+        }
+        return LoadingPage();
+      },
     );
   }
 }

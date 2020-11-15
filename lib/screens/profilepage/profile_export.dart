@@ -8,5 +8,7 @@ export 'package:RecipeApp/screens/loginpage/login_page.dart';
 export 'package:RecipeApp/screens/profilepage/components/profile_button.dart';
 export 'package:RecipeApp/services/authentication.dart';
 export 'package:RecipeApp/screens/profilepage/components/body.dart';
-export 'package:connectivity/connectivity.dart';
 export 'package:RecipeApp/screens/errorpage/error_page.dart';
+export 'package:RecipeApp/screens/loadingpage/loading_page.dart';
+export 'package:RecipeApp/screens/profilepage/components/buttons.dart';
+export 'package:connectivity/connectivity.dart';

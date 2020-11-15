@@ -4,4 +4,7 @@ export 'package:RecipeApp/screens/homepage/components/home_slider.dart';
 export 'package:RecipeApp/screens/homepage/components/low_calories_list.dart';
 export 'package:RecipeApp/screens/homepage/components/popular_list.dart';
 export 'package:RecipeApp/screens/homepage/components/body.dart';
+export 'package:RecipeApp/screens/loadingpage/loading_page.dart';
+export 'package:RecipeApp/screens/errorpage/error_page.dart';
+export 'package:connectivity/connectivity.dart';
 export 'package:RecipeApp/models/user.dart';

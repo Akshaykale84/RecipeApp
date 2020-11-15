@@ -12,11 +12,6 @@ class Buttons extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ProfileButton(
-            icon: Icons.edit_outlined,
-            data: "Edit Profile",
-            tap: () {},
-          ),
-          ProfileButton(
             icon: Icons.account_circle_outlined,
             data: "Account Settings",
             tap: () {},
@@ -53,4 +48,3 @@ class Buttons extends StatelessWidget {
     );
   }
 }
-

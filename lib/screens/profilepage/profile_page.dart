@@ -57,11 +57,7 @@ class _ProfilePageState extends State<ProfilePage>
             ),
           );
         }
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+        return LoadingPage();
       },
     );
   }

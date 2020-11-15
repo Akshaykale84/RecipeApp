@@ -1,2 +1,12 @@
 export 'package:RecipeApp/main_page.dart';
 export 'package:flutter/cupertino.dart';
+export 'package:RecipeApp/screens/loginpage/components/description.dart';
+export 'package:RecipeApp/screens/loginpage/components/facebook_button.dart';
+export 'package:RecipeApp/screens/loginpage/components/google_button.dart';
+export 'package:RecipeApp/screens/loginpage/components/welcome_text.dart';
+export 'package:RecipeApp/screens/loginpage/components/body.dart';
+export 'package:RecipeApp/services/authentication.dart';
+export 'package:connectivity/connectivity.dart';
+export 'package:flushbar/flushbar.dart';
+export 'package:RecipeApp/screens/loginpage/components/error_page.dart';
+export 'package:RecipeApp/screens/loadingpage/loading_page.dart';

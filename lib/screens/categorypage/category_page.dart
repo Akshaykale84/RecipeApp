@@ -35,6 +35,10 @@ class _CategoryPageState extends State<CategoryPage>
     Icons.home,
     Icons.logout,
     Icons.close,
+    Icons.add,
+    Icons.home,
+    Icons.logout,
+    Icons.close,
     Icons.icecream,
     Icons.ac_unit,
     Icons.add,
@@ -51,12 +55,14 @@ class _CategoryPageState extends State<CategoryPage>
       builder: (context, snapshot) {
         if (result == ConnectivityResult.mobile) {
           return Scaffold(
+            extendBody: true,
             backgroundColor: Color(0xff212121),
             body: CategoryGridView(icon: icon),
           );
         }
         if (result == ConnectivityResult.wifi) {
           return Scaffold(
+            extendBody: true,
             backgroundColor: Color(0xff212121),
             body: CategoryGridView(icon: icon),
           );
@@ -68,17 +74,9 @@ class _CategoryPageState extends State<CategoryPage>
             ),
           );
         }
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+        return LoadingPage();
       },
     );
-    // return Scaffold(
-    //   backgroundColor: Color(0xff212121),
-    //   body: CategoryGridView(icon: icon),
-    // );
   }
 
   @override

@@ -10,19 +10,33 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _index = 0;
+  int index = 0;
+  bool onTap = false;
   final UserData userData;
   PageController _pageController = PageController();
   _MainPageState(this.userData);
 
   void _itemTapped(int selectedIndex) {
-    if (selectedIndex == 1) {
-      showSearch(context: context, delegate: SearchBar());
-    } else {
-      _pageController.jumpToPage(selectedIndex);
-      setState(() {
-        _index = selectedIndex;
+    onTap = true;
+    _pageController.animateToPage(
+      selectedIndex,
+      duration: Duration(milliseconds: 400),
+      curve: Curves.bounceInOut,
+    );
+    setState(() {
+      index = selectedIndex;
+    });
+  }
+
+  void onPageChanged(int currentIndex) {
+    if (!onTap) {
+      Timer(Duration(milliseconds: 400), () {
+        setState(() {
+          index = currentIndex;
+        });
       });
+    } else {
+      onTap = false;
     }
   }
 
@@ -53,6 +67,11 @@ class _MainPageState extends State<MainPage> {
           return Scaffold(
             extendBody: true,
             body: PageView(
+              onPageChanged: (value) {
+                setState(() {
+                  index = value;
+                });
+              },
               controller: _pageController,
               children: <Widget>[
                 HomePage(userData: userData),
@@ -60,7 +79,6 @@ class _MainPageState extends State<MainPage> {
                 CategoryPage(userData: userData),
                 ProfilePage(userData: userData),
               ],
-              scrollDirection: Axis.horizontal,
             ),
             bottomNavigationBar: buildGNavBar(),
           );
@@ -69,6 +87,9 @@ class _MainPageState extends State<MainPage> {
           return Scaffold(
             extendBody: true,
             body: PageView(
+              onPageChanged: (value) {
+                onPageChanged(value);
+              },
               controller: _pageController,
               children: <Widget>[
                 HomePage(userData: userData),
@@ -76,7 +97,6 @@ class _MainPageState extends State<MainPage> {
                 CategoryPage(userData: userData),
                 ProfilePage(userData: userData),
               ],
-              physics: NeverScrollableScrollPhysics(),
             ),
             bottomNavigationBar: buildGNavBar(),
           );
@@ -88,11 +108,7 @@ class _MainPageState extends State<MainPage> {
             ),
           );
         }
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+        return LoadingPage();
       },
     );
   }
@@ -106,7 +122,7 @@ class _MainPageState extends State<MainPage> {
           borderRadius: BorderRadius.all(Radius.circular(100)),
         ),
         child: GNav(
-          selectedIndex: _index,
+          selectedIndex: index,
           curve: Curves.bounceIn,
           duration: Duration(milliseconds: 400),
           tabs: [
@@ -125,7 +141,7 @@ class _MainPageState extends State<MainPage> {
               icon: Icons.search,
               iconColor: Colors.black,
               iconActiveColor: Colors.blue,
-              text: "Search",
+              text: "Explore",
               textColor: Colors.black,
               backgroundColor: Colors.purple.withOpacity(0.2),
               iconSize: 24,

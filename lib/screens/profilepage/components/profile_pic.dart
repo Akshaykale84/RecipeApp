@@ -1,9 +1,12 @@
+import 'package:RecipeApp/main_export.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePic extends StatelessWidget {
   const ProfilePic({
     Key key,
+    @required this.userData,
   }) : super(key: key);
+  final UserData userData;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,10 @@ class ProfilePic extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.red,
+            image: DecorationImage(
+              image: NetworkImage(userData.photoUrl),
+              fit: BoxFit.contain,
+            ),
           ),
           height: MediaQuery.of(context).size.height * 0.17,
         ),

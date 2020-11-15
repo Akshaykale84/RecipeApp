@@ -31,34 +31,34 @@ class ProfileButton extends StatelessWidget {
 
   Row buildButtonBody(BuildContext context) {
     return Row(
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.06,
-          ),
-          Row(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.52,
-                child: Text(
-                  "$data",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
+      children: <Widget>[
+        Icon(
+          icon,
+          color: Colors.white,
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.06,
+        ),
+        Row(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width * 0.52,
+              child: Text(
+                "$data",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white,
                 ),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.white,
-              ),
-            ],
-          ),
-        ],
-      );
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

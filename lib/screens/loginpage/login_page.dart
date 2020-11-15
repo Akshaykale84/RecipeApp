@@ -1,8 +1,5 @@
-// import 'package:RecipeApp/models/user.dart';
 import 'package:RecipeApp/screens/loginpage/login_export.dart';
-import 'package:RecipeApp/services/authentication.dart';
 import 'package:flutter/material.dart';
-import 'package:flushbar/flushbar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,7 +9,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   void googleLogin() {
     signInWithGoogle().then((value) {
-      print(value.name);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -73,133 +69,52 @@ class _LoginPageState extends State<LoginPage> {
     )..show(context);
   }
 
-  void register() {
-    print("register function");
+  var result;
+  check() async {
+    result = await Connectivity().checkConnectivity();
   }
 
   @override
+  void initState() {
+    check();
+    super.initState();
+  }
+
+  void refresh() async {
+    result = await Connectivity().checkConnectivity();
+    setState(() {});
+  }
+
+  Future<ConnectivityResult> _check = Connectivity().checkConnectivity();
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/food.jpg'),
-                fit: BoxFit.cover,
-              ),
+    return FutureBuilder(
+      future: _check,
+      builder: (context, snapshot) {
+        if (result == ConnectivityResult.mobile) {
+          return Scaffold(
+            body: Body(
+              googleLogin: googleLogin,
+              facebookLogin: facebookLogin,
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Color(0xff161d27).withOpacity(0.9),
-                  Color(0xff161d27),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
+          );
+        }
+        if (result == ConnectivityResult.wifi) {
+          return Scaffold(
+            body: Body(
+              googleLogin: googleLogin,
+              facebookLogin: facebookLogin,
             ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  "Welcome!",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 38,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.013,
-                ),
-                Text(
-                  "Time to cook, let's Sign In",
-                  style: TextStyle(color: Colors.grey.shade500, fontSize: 16),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.026,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.065,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: FlatButton.icon(
-                    color: Colors.white,
-                    onPressed: googleLogin,
-                    icon: Container(
-                      margin: EdgeInsets.only(
-                        right: 5,
-                      ),
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.height * 0.05,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"),
-                            fit: BoxFit.fill),
-                      ),
-                    ),
-                    label: Text(
-                      "Sign in with Google",
-                      style: TextStyle(
-                        color: Color(0xff1877F2),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.026,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.065,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: FlatButton.icon(
-                    color: Colors.white,
-                    onPressed: facebookLogin,
-                    icon: Container(
-                      margin: EdgeInsets.only(right: 5),
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.height * 0.05,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512"),
-                            fit: BoxFit.fill),
-                      ),
-                    ),
-                    label: Text(
-                      "Sign in with Facebook",
-                      style: TextStyle(
-                        color: Color(0xff1877F2),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.18,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+        if (result == ConnectivityResult.none) {
+          return ErrorPage(
+            tap: refresh,
+          );
+        }
+        return LoadingPage();
+      },
     );
   }
 }

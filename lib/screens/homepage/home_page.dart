@@ -1,6 +1,4 @@
-import 'package:RecipeApp/screens/errorpage/error_page.dart';
 import 'package:RecipeApp/screens/homepage/home_export.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,11 +59,7 @@ class _HomePageState extends State<HomePage>
             ),
           );
         }
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+        return LoadingPage();
       },
     );
   }

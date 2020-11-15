@@ -26,23 +26,14 @@ class DesertList extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 10, right: 10),
             alignment: Alignment.centerLeft,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Deserts",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.arrow_forward),
-                  color: Colors.white,
-                  onPressed: () {},
-                ),
-              ],
+            margin: EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              "Deserts",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.normal,
+                color: Colors.white,
+              ),
             ),
           ),
           Container(
