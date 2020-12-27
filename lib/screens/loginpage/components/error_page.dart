@@ -6,7 +6,7 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         bottom: false,
         child: Container(
@@ -41,5 +41,4 @@ class ErrorPage extends StatelessWidget {
       ),
     );
   }
-
 }

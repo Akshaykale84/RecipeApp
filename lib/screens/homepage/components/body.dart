@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
                 ),
               ),
               HomeSlider(list: list),
-              PopularList(list: list, context: context),
+              PopularList(list: list),
               LowCaloriesList(list: list),
               BeveragesList(list: list, context: context),
               DesertList(list: list, context: context),

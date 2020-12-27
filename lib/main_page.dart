@@ -76,7 +76,6 @@ class _MainPageState extends State<MainPage> {
               children: <Widget>[
                 HomePage(userData: userData),
                 SearchPage(userData: userData),
-                CategoryPage(userData: userData),
                 ProfilePage(userData: userData),
               ],
             ),
@@ -94,7 +93,6 @@ class _MainPageState extends State<MainPage> {
               children: <Widget>[
                 HomePage(userData: userData),
                 SearchPage(userData: userData),
-                CategoryPage(userData: userData),
                 ProfilePage(userData: userData),
               ],
             ),
@@ -148,17 +146,17 @@ class _MainPageState extends State<MainPage> {
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               gap: 10,
             ),
-            GButton(
-              icon: Icons.category,
-              iconColor: Colors.black,
-              iconActiveColor: Colors.blue,
-              text: "Categories",
-              textColor: Colors.black,
-              backgroundColor: Colors.purple.withOpacity(0.2),
-              iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              gap: 10,
-            ),
+            // GButton(
+            //   icon: Icons.category,
+            //   iconColor: Colors.black,
+            //   iconActiveColor: Colors.blue,
+            //   text: "Categories",
+            //   textColor: Colors.black,
+            //   backgroundColor: Colors.purple.withOpacity(0.2),
+            //   iconSize: 24,
+            //   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            //   gap: 10,
+            // ),
             GButton(
               leading: Container(
                 decoration: BoxDecoration(

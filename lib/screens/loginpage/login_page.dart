@@ -25,10 +25,13 @@ class _LoginPageState extends State<LoginPage> {
   void facebookLogin() {
     signInWithFacebook().then((value) {
       print(value.name);
+      print(value.photoUrl);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => MainPage(),
+          builder: (context) => MainPage(
+            userData: value,
+          ),
         ),
       );
     }).catchError((e) {
