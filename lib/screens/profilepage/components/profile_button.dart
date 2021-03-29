@@ -17,12 +17,12 @@ class ProfileButton extends StatelessWidget {
       margin: EdgeInsets.all(6),
       height: MediaQuery.of(context).size.height * 0.07,
       width: MediaQuery.of(context).size.width * 0.82,
-      child: RaisedButton(
-        color: Color(0xff373737),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28.0),
-          side: BorderSide(color: Colors.blue),
-        ),
+      child: ElevatedButton(
+        // color: Color(0xff373737),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(28.0),
+        //   side: BorderSide(color: Colors.blue),
+        // ),
         child: buildButtonBody(context),
         onPressed: tap,
       ),

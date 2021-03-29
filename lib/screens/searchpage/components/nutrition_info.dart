@@ -43,7 +43,7 @@ class _NutritionInfoState extends State<NutritionInfo> {
                   ),
                 ),
               ),
-              FlatButton.icon(
+              TextButton.icon(
                 label: Icon(
                   _icon,
                   color: Colors.blue,

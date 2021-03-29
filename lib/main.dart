@@ -81,10 +81,11 @@ class _MyAppState extends State<MyApp> {
     User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       userData = UserData(
-          emailId: user.email,
-          name: user.displayName,
-          photoUrl: user.photoURL,
-          uid: user.uid);
+        emailId: user.email,
+        name: user.displayName,
+        photoUrl: user.photoURL,
+        uid: user.uid,
+      );
     }
     return MaterialApp(
       title: 'Recipe App',

@@ -36,9 +36,9 @@ class Preparation extends StatelessWidget {
           ),
           height: MediaQuery.of(context).size.height * 0.07,
           width: MediaQuery.of(context).size.width,
-          child: RaisedButton(
+          child: ElevatedButton(
             onPressed: () {},
-            color: Colors.blue,
+            // color: Colors.blue,
             child: Text(
               "step-by-step preparation",
               style: TextStyle(

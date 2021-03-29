@@ -11,8 +11,8 @@ class SearchButton extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.06,
       width: MediaQuery.of(context).size.width * 0.40,
-      child: FlatButton.icon(
-        color: Colors.white,
+      child: TextButton.icon(
+        // color: Colors.white,
         onPressed: () {
           showSearch(
             context: context,
@@ -39,9 +39,9 @@ class SearchButton extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
-        ),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(30),
+        // ),
       ),
     );
   }

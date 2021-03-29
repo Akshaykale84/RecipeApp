@@ -23,7 +23,7 @@ class ErrorPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text(
                     "retry",
                     style: TextStyle(

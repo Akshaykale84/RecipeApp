@@ -12,8 +12,8 @@ class GoogleButton extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.065,
       width: MediaQuery.of(context).size.width * 0.80,
-      child: FlatButton.icon(
-        color: Colors.white,
+      child: TextButton.icon(
+        // color: Colors.white,
         onPressed: googleLogin,
         icon: Container(
           margin: EdgeInsets.only(
@@ -37,9 +37,9 @@ class GoogleButton extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
-        ),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(30),
+        // ),
       ),
     );
   }
